@@ -1,0 +1,1 @@
+<view class="setting data-v-3f1c30b4"><view class="box list data-v-3f1c30b4"></view><block wx:if="{{hasLogin}}"><view data-event-opts="{{[['tap',[['handleLogout',['$event']]]]]}}" class="logout data-v-3f1c30b4" bindtap="__e">退出登录</view></block></view>

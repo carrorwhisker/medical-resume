@@ -1,0 +1,241 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		
+		{
+			"path": "pages/home/index",
+			"style": {
+				"navigationBarTitleText": "医简历",
+				"backgroundColor": "#FFFFFF",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/resume/index",
+			"style": {
+				"navigationBarTitleText": "简历库",
+				"navigationBarBackgroundColor": "#F6F6F6"
+			}
+		},
+		{
+			"path": "pages/resume/details",
+			"style": {
+				"navigationBarTitleText": "简历库",
+				"navigationBarBackgroundColor": "#F6F6F6"
+			}
+		},
+		{
+			"path": "pages/meeting/index",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/meeting/details",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/meeting/apply",
+			"style": {
+				"navigationBarTitleText": "报名",
+				"navigationBarBackgroundColor": "#F6F6F6"
+			}
+		},
+		{
+			"path": "pages/meeting/applyResult",
+			"style": {
+				"navigationBarTitleText": " "
+			}
+		},
+		{
+			"path": "pages/my/index",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/my/setting",
+			"style": {
+				"navigationBarTitleText": "设置"
+			}
+		},
+		{
+			"path": "pages/my/setPwd",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/my/collect",
+			"style": {
+				"navigationBarTitleText": "我的收藏",
+				"navigationBarBackgroundColor": "#F6F6F6"
+			}
+		},
+		{
+			"path": "pages/my/meetList",
+			"style": {
+				"navigationBarTitleText": "我的活动",
+				"navigationBarBackgroundColor": "#F6F6F6"
+			}
+		},
+		{
+			"path": "pages/my/updateInfo",
+			"style": {
+				"navigationBarTitleText": "资料修改",
+				"navigationBarBackgroundColor": "#F6F6F6"
+			}
+		},
+		{
+			"path": "pages/itinerary/index",
+			"style": {
+				"navigationBarTitleText": "我的行程",
+				"navigationBarBackgroundColor": "#F6F6F6"
+			}
+		},
+		// {
+		// 	"path": "pages/index/index",
+		// 	"style": {
+		// 		"navigationBarTitleText": "简历"
+		// 	}
+		// },
+		{
+			"path": "pages/myCur/index",
+			"style": {
+				"navigationBarTitleText": "我的简历"
+			}
+		},
+		{
+			"path": "pages/myCur/analyze",
+			"style": {
+				"navigationBarTitleText": "我的简历数据",
+				"navigationBarBackgroundColor": "#4275FD",
+				"navigationBarTextStyle": "white",
+				"enablePullDownRefresh": true
+			}
+		},
+		{
+			"path": "pages/myCur/basicInfo",
+			"style": {
+				"navigationBarTitleText": "基本信息"
+			}
+		},
+		{
+			"path": "pages/myCur/wechat",
+			"style": {
+				"navigationBarTitleText": "微信"
+			}
+		},
+		{
+			"path": "pages/myCur/personalDesc",
+			"style": {
+				"navigationBarTitleText": "个人介绍"
+			}
+		},
+		{
+			"path": "pages/myCur/realAuth",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/myCur/realAuthed",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/myCur/uploadAvt",
+			"style": {
+				"navigationStyle": "custom",
+				"enablePullDownRefresh": false,
+				"disableScroll": true
+			}
+		},
+		{
+			"path": "pages/vip/index",
+			"style": {
+				"navigationBarTitleText": "会员",
+				"navigationBarBackgroundColor": "#252531",
+				"navigationBarTextStyle": "white",
+				"backgroundColor": "#252531"
+			}
+		},
+		{
+			"path": "pages/login/index",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
+			"path": "pages/login/phoneLogin",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+    // zd新增：会议通第三方
+    {
+    	"path": "pages/webview/index",
+    	"style": {
+    		"navigationStyle": "custom"
+    	}
+    },
+		{
+			"path": "pages/article/index",
+			"style": {
+				"navigationStyle": "default",
+				"navigationBarTitleText": "隐私协议"
+			}
+		},
+		{
+			"path": "pages/city/index",
+			"style": {
+				"navigationStyle": "default",
+				"navigationBarTitleText": "选择地址"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "医简历",
+		"navigationBarBackgroundColor": "#FFFFFF",
+		"backgroundColor": "#F6F6F6"
+	},
+	"tabBar": {
+		"backgroundColor": "#FFFFFF",
+		"borderStyle": "white",
+		"color": "#0F0606",
+		"selectedColor": "#0F0606",
+		"list": [{
+				"iconPath": "/static/tabbar/home_.png",
+				"selectedIconPath": "/static/tabbar/home.png",
+				"pagePath": "pages/home/index",
+				"text": "首页"
+			},
+			{
+				"iconPath": "/static/tabbar/resume_.png",
+				"selectedIconPath": "/static/tabbar/resume.png",
+				"pagePath": "pages/resume/index",
+				"text": "简历库"
+			},
+			{
+				"iconPath": "/static/tabbar/meeting_.png",
+				"selectedIconPath": "/static/tabbar/meeting.png",
+				"pagePath": "pages/meeting/index",
+				"text": "会议通"
+			},
+			{
+				"iconPath": "/static/tabbar/my_.png",
+				"selectedIconPath": "/static/tabbar/my.png",
+				"pagePath": "pages/my/index",
+				"text": "我的"
+			}
+		]
+	},
+	"uniIdRouter": {},
+	"easycom": {
+		"autoscan": true,
+		"^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
+	}
+}

@@ -1,0 +1,8 @@
+{
+  "navigationBarTitleText": "简历库",
+  "navigationBarBackgroundColor": "#F6F6F6",
+  "usingComponents": {
+    "pop-box": "/components/pop-box/pop-box",
+    "card-dome": "/components/card-dome/card-dome"
+  }
+}

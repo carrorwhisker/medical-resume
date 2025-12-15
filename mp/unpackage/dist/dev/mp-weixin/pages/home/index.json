@@ -1,0 +1,12 @@
+{
+  "navigationBarTitleText": "医简历",
+  "backgroundColor": "#FFFFFF",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "card-dome": "/components/card-dome/card-dome",
+    "cur-item": "/components/cur-item/cur-item",
+    "empty": "/components/empty/empty",
+    "bottom-rule": "/components/bottom-rule/bottom-rule",
+    "login-check": "/components/login-check/login-check"
+  }
+}

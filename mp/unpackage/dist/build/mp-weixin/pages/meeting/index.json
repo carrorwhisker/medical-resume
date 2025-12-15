@@ -1,0 +1,9 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "r-top": "/components/r-top/r-top",
+    "empty": "/components/empty/empty",
+    "select-picker": "/components/select-picker/select-picker",
+    "login-check": "/components/login-check/login-check"
+  }
+}

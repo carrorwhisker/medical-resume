@@ -1,0 +1,6 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "r-top": "/components/r-top/r-top"
+  }
+}

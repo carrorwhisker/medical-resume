@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "资料修改",
+  "navigationBarBackgroundColor": "#F6F6F6",
+  "usingComponents": {
+    "my-input": "/components/my-input/my-input"
+  }
+}

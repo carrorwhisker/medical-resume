@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "我的简历数据",
+  "navigationBarBackgroundColor": "#4275FD",
+  "navigationBarTextStyle": "white",
+  "enablePullDownRefresh": true,
+  "usingComponents": {
+    "cur-item": "/components/cur-item/cur-item",
+    "empty": "/components/empty/empty"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "报名",
+  "navigationBarBackgroundColor": "#F6F6F6",
+  "usingComponents": {
+    "my-input": "/components/my-input/my-input"
+  }
+}

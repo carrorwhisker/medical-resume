@@ -1,0 +1,7 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "bottom-rule": "/components/bottom-rule/bottom-rule",
+    "login-check": "/components/login-check/login-check"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "navigationStyle": "custom",
+  "enablePullDownRefresh": false,
+  "disableScroll": true,
+  "usingComponents": {
+    "qf-image-cropper": "/uni_modules/qf-image-cropper/components/qf-image-cropper/qf-image-cropper"
+  }
+}

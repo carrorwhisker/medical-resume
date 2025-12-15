@@ -1,0 +1,71 @@
+{
+  "pages": [
+    "pages/home/index",
+    "pages/resume/index",
+    "pages/resume/details",
+    "pages/meeting/index",
+    "pages/meeting/details",
+    "pages/meeting/apply",
+    "pages/meeting/applyResult",
+    "pages/my/index",
+    "pages/my/setting",
+    "pages/my/setPwd",
+    "pages/my/collect",
+    "pages/my/meetList",
+    "pages/my/updateInfo",
+    "pages/myCur/index",
+    "pages/myCur/analyze",
+    "pages/myCur/basicInfo",
+    "pages/myCur/wechat",
+    "pages/myCur/personalDesc",
+    "pages/myCur/realAuth",
+    "pages/myCur/realAuthed",
+    "pages/myCur/uploadAvt",
+    "pages/vip/index",
+    "pages/login/index",
+    "pages/login/phoneLogin",
+    "pages/webview/index",
+    "pages/article/index",
+    "pages/city/index"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "医简历",
+    "navigationBarBackgroundColor": "#FFFFFF",
+    "backgroundColor": "#F6F6F6"
+  },
+  "tabBar": {
+    "backgroundColor": "#FFFFFF",
+    "borderStyle": "white",
+    "color": "#0F0606",
+    "selectedColor": "#0F0606",
+    "list": [
+      {
+        "iconPath": "/static/tabbar/home_.png",
+        "selectedIconPath": "/static/tabbar/home.png",
+        "pagePath": "pages/home/index",
+        "text": "首页"
+      },
+      {
+        "iconPath": "/static/tabbar/resume_.png",
+        "selectedIconPath": "/static/tabbar/resume.png",
+        "pagePath": "pages/resume/index",
+        "text": "简历库"
+      },
+      {
+        "iconPath": "/static/tabbar/meeting_.png",
+        "selectedIconPath": "/static/tabbar/meeting.png",
+        "pagePath": "pages/meeting/index",
+        "text": "会议通"
+      },
+      {
+        "iconPath": "/static/tabbar/my_.png",
+        "selectedIconPath": "/static/tabbar/my.png",
+        "pagePath": "pages/my/index",
+        "text": "我的"
+      }
+    ]
+  },
+  "usingComponents": {}
+}

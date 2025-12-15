@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "简历库",
+  "navigationBarBackgroundColor": "#F6F6F6",
+  "usingComponents": {
+    "resume-item": "/components/resume-item/resume-item",
+    "empty": "/components/empty/empty",
+    "select-picker": "/components/select-picker/select-picker",
+    "login-check": "/components/login-check/login-check"
+  }
+}

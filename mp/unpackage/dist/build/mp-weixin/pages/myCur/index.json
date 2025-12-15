@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "我的简历",
+  "usingComponents": {
+    "bottom-pop": "/components/bottom-pop/bottom-pop"
+  }
+}

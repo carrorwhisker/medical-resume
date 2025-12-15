@@ -1,0 +1,2 @@
+page,
+uni-page-body{height:100%}.collect.data-v-74b8bd7f{height:100%;display:flex;flex-direction:column;overflow:hidden;padding-top:2rpx}.collect .collect_top.data-v-74b8bd7f{width:750rpx;height:80rpx;display:flex;align-items:center;padding:0rpx 30rpx;background:#f6f6f6;margin-bottom:20rpx}.collect .collect_top .select.data-v-74b8bd7f{font-weight:400;font-size:26rpx;color:#8c8c8c;display:flex;align-items:center;margin-right:48rpx}.collect .collect_top .select > image.data-v-74b8bd7f{width:24rpx;height:13rpx;margin-left:10rpx}

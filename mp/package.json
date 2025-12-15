@@ -1,0 +1,18 @@
+{
+    "id": "cwiyc-citypicker",
+    "displayName": "城市选择器",
+    "version": "1.0.0",
+    "description": "基于uview-plus的城市选择器",
+    "keywords": [
+        "城市"
+    ],
+    "dcloudext": {
+        "category": [
+            "前端组件",
+            "通用组件"
+        ]
+    },
+    "dependencies": {
+        "uview-ui": "^2.0.38"
+    }
+}

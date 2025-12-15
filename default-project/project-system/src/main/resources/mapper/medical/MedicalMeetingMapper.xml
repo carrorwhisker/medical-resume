@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.project.system.mapper.medical.MedicalMeetingMapper">
+    
+    <resultMap type="MedicalMeeting" id="MedicalMeetingResult">
+        <id     property="id"                column="id"                />
+        <result property="meetingName"       column="meeting_name"      />
+        <result property="meetingImg"        column="meeting_img"       />
+        <result property="startTime"         column="start_time"        />
+        <result property="endTime"           column="end_time"          />
+        <result property="qyName"            column="qy_name"           />
+        <result property="qyId"              column="qy_id"             />
+        <result property="meetingContent"    column="meeting_content"   />
+        <result property="isPriceStatus"     column="is_price_status"   />
+        <result property="price"             column="price"             />
+        <result property="authorAdminId"     column="author_admin_id"   />
+        <result property="author"            column="author"            />
+        <result property="createTimeStamp"   column="create_time"       />
+        <result property="updateTimeStamp"   column="uddate_time"       />
+        <result property="gwBanner"          column="gw_banner"         />
+        <result property="gwUrl"             column="gw_url"            />
+        <result property="meetingAddress"    column="meeting_address"   />
+        <result property="extContent"        column="ext_content"       />
+    </resultMap>
+
+    <sql id="selectMeetingVo">
+        select id, meeting_name, meeting_img, start_time, end_time, qy_name, qy_id, meeting_content,
+               is_price_status, price, author_admin_id, author, create_time, uddate_time, gw_banner, gw_url, meeting_address, ext_content
+        from project_meeting
+    </sql>
+
+    <select id="selectMeetingList" parameterType="MedicalMeeting" resultMap="MedicalMeetingResult">
+        <include refid="selectMeetingVo"/>
+        <where>  
+            <if test="qyId != null"> and qy_id = #{qyId}</if>
+            <if test="qyName != null and qyName != ''"> and qy_name like concat('%', #{qyName}, '%')</if>
+            <if test="meetingName != null and meetingName != ''"> and meeting_name like concat('%', #{meetingName}, '%')</if>
+        </where>
+        order by create_time desc
+    </select>
+    
+    <select id="selectMeetingById" parameterType="Long" resultMap="MedicalMeetingResult">
+        <include refid="selectMeetingVo"/>
+        where id = #{id}
+    </select>
+    
+    <insert id="insertMeeting" parameterType="MedicalMeeting" useGeneratedKeys="true" keyProperty="id">
+        insert into project_meeting(
+            meeting_name, meeting_img, start_time, end_time, qy_name, qy_id, meeting_content,
+            is_price_status, price, author_admin_id, author, create_time, uddate_time, gw_banner, gw_url, meeting_address, ext_content
+        )values(
+            #{meetingName}, #{meetingImg}, #{startTime}, #{endTime}, #{qyName}, #{qyId}, #{meetingContent},
+            #{isPriceStatus}, #{price}, #{authorAdminId}, #{author}, #{createTimeStamp}, #{updateTimeStamp}, #{gwBanner}, #{gwUrl}, #{meetingAddress}, #{extContent}
+        )
+    </insert>
+    
+    <update id="updateMeeting" parameterType="MedicalMeeting">
+        update project_meeting
+        <set>
+            <if test="meetingName != null and meetingName != ''">meeting_name = #{meetingName},</if>
+            <if test="meetingImg != null">meeting_img = #{meetingImg},</if>
+            <if test="startTime != null">start_time = #{startTime},</if>
+            <if test="endTime != null">end_time = #{endTime},</if>
+            <if test="qyName != null">qy_name = #{qyName},</if>
+            <if test="qyId != null">qy_id = #{qyId},</if>
+            <if test="meetingContent != null">meeting_content = #{meetingContent},</if>
+            <if test="isPriceStatus != null">is_price_status = #{isPriceStatus},</if>
+            <if test="price != null">price = #{price},</if>
+            <if test="authorAdminId != null">author_admin_id = #{authorAdminId},</if>
+            <if test="author != null">author = #{author},</if>
+            <if test="updateTimeStamp != null">uddate_time = #{updateTimeStamp},</if>
+            <if test="gwBanner != null">gw_banner = #{gwBanner},</if>
+            <if test="gwUrl != null">gw_url = #{gwUrl},</if>
+            <if test="meetingAddress != null">meeting_address = #{meetingAddress},</if>
+            <if test="extContent != null">ext_content = #{extContent},</if>
+        </set>
+        where id = #{id}
+    </update>
+    
+    <delete id="deleteMeetingById" parameterType="Long">
+        delete from project_meeting where id = #{id}
+    </delete>
+
+</mapper>
+

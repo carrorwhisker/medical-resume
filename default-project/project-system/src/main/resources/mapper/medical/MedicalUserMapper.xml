@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.project.system.mapper.medical.MedicalUserMapper">
+    
+    <resultMap type="MedicalUser" id="MedicalUserResult">
+        <id     property="id"            column="id"            />
+        <result property="openid"        column="openid"        />
+        <result property="uid"           column="uid"           />
+        <result property="username"      column="username"      />
+        <result property="phone"         column="phone"         />
+        <result property="img"           column="img"           />
+        <result property="createTimeStamp"    column="create_time"   />
+        <result property="updateTimeStamp"    column="update_time"   />
+        <result property="content"       column="content"       />
+        <result property="isVip"         column="is_vip"        />
+        <result property="wechatPhone"   column="wechat_phone"  />
+        <result property="vipTime"       column="vip_time"      />
+    </resultMap>
+
+    <sql id="selectUserVo">
+        select id, openid, uid, username, phone, img, create_time, update_time, content, is_vip, wechat_phone, vip_time
+        from project_user
+    </sql>
+
+    <select id="selectUserList" parameterType="MedicalUser" resultMap="MedicalUserResult">
+        <include refid="selectUserVo"/>
+        <where>  
+            <if test="uid != null and uid != ''"> and uid = #{uid}</if>
+            <if test="openid != null and openid != ''"> and openid = #{openid}</if>
+            <if test="username != null and username != ''"> and username like concat('%', #{username}, '%')</if>
+        </where>
+        order by create_time desc
+    </select>
+    
+    <select id="selectUserByUid" parameterType="String" resultMap="MedicalUserResult">
+        <include refid="selectUserVo"/>
+        where uid = #{uid}
+    </select>
+    
+    <select id="selectUserByOpenid" parameterType="String" resultMap="MedicalUserResult">
+        <include refid="selectUserVo"/>
+        where openid = #{openid}
+    </select>
+    
+    <insert id="insertUser" parameterType="MedicalUser" useGeneratedKeys="true" keyProperty="id">
+        insert into project_user(
+            openid, uid, username, phone, img, create_time, update_time, content, is_vip, wechat_phone, vip_time
+        )values(
+            #{openid}, #{uid}, #{username}, #{phone}, #{img}, #{createTimeStamp}, #{updateTimeStamp}, #{content}, #{isVip}, #{wechatPhone}, #{vipTime}
+        )
+    </insert>
+    
+    <update id="updateUser" parameterType="MedicalUser">
+        update project_user
+        <set>
+            <if test="username != null and username != ''">username = #{username},</if>
+            <if test="phone != null">phone = #{phone},</if>
+            <if test="img != null">img = #{img},</if>
+            <if test="updateTimeStamp != null">update_time = #{updateTimeStamp},</if>
+            <if test="content != null">content = #{content},</if>
+            <if test="isVip != null">is_vip = #{isVip},</if>
+            <if test="wechatPhone != null">wechat_phone = #{wechatPhone},</if>
+            <if test="vipTime != null">vip_time = #{vipTime},</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteUserById" parameterType="Long">
+        delete from project_user where id = #{id}
+    </delete>
+    
+    <delete id="deleteUserByUid" parameterType="String">
+        delete from project_user where uid = #{uid}
+    </delete>
+
+</mapper>
+

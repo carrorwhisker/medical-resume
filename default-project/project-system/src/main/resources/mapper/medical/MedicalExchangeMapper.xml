@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.project.system.mapper.medical.MedicalExchangeMapper">
+    
+    <resultMap type="MedicalExchange" id="MedicalExchangeResult">
+        <id     property="id"                column="id"                />
+        <result property="exchangeCardId"     column="exchange_card_id"   />
+        <result property="exchangeCardUid"    column="exchange_card_uid" />
+        <result property="uid"               column="uid"                />
+        <result property="uidCardId"         column="uid_card_id"        />
+        <result property="createTimeStamp"   column="create_time"        />
+        <result property="status"            column="status"             />
+    </resultMap>
+
+    <sql id="selectExchangeVo">
+        select id, exchange_card_id, exchange_card_uid, uid, uid_card_id, create_time, status
+        from project_exchange
+    </sql>
+
+    <select id="selectExchangeList" parameterType="MedicalExchange" resultMap="MedicalExchangeResult">
+        <include refid="selectExchangeVo"/>
+        <where>  
+            <if test="uid != null and uid != ''"> and uid = #{uid}</if>
+            <if test="exchangeCardUid != null and exchangeCardUid != ''"> and exchange_card_uid = #{exchangeCardUid}</if>
+            <if test="status != null"> and status = #{status}</if>
+        </where>
+        order by create_time desc
+    </select>
+    
+    <select id="selectExchangeById" parameterType="Long" resultMap="MedicalExchangeResult">
+        <include refid="selectExchangeVo"/>
+        where id = #{id}
+    </select>
+    
+    <insert id="insertExchange" parameterType="MedicalExchange" useGeneratedKeys="true" keyProperty="id">
+        insert into project_exchange(exchange_card_id, exchange_card_uid, uid, uid_card_id, create_time, status)
+        values(#{exchangeCardId}, #{exchangeCardUid}, #{uid}, #{uidCardId}, #{createTimeStamp}, #{status})
+    </insert>
+    
+    <update id="updateExchange" parameterType="MedicalExchange">
+        update project_exchange
+        <set>
+            <if test="exchangeCardId != null">exchange_card_id = #{exchangeCardId},</if>
+            <if test="exchangeCardUid != null">exchange_card_uid = #{exchangeCardUid},</if>
+            <if test="uid != null">uid = #{uid},</if>
+            <if test="uidCardId != null">uid_card_id = #{uidCardId},</if>
+            <if test="status != null">status = #{status},</if>
+        </set>
+        where id = #{id}
+    </update>
+    
+    <delete id="deleteExchangeById" parameterType="Long">
+        delete from project_exchange where id = #{id}
+    </delete>
+    
+    <select id="selectExchangeByKeys" parameterType="map" resultMap="MedicalExchangeResult">
+        <include refid="selectExchangeVo"/>
+        where exchange_card_id = #{exchangeCardId}
+          and exchange_card_uid = #{exchangeCardUid}
+          and uid = #{uid}
+          and uid_card_id = #{uidCardId}
+        limit 1
+    </select>
+
+</mapper>
+

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.project.system.mapper.medical.MedicalAuthenticationMapper">
+    
+    <resultMap type="MedicalAuthentication" id="MedicalAuthenticationResult">
+        <id     property="id"                        column="id"                        />
+        <result property="name"                      column="name"                       />
+        <result property="num"                       column="num"                        />
+        <result property="authenticationStraight"     column="authentication_straight"    />
+        <result property="authenticationSide"        column="authentication_side"       />
+        <result property="createTimeStamp"          column="create_time"                />
+        <result property="updateTimeStamp"          column="update_time"                 />
+        <result property="uid"                       column="uid"                        />
+    </resultMap>
+
+    <select id="selectAuthenticationByUid" parameterType="String" resultMap="MedicalAuthenticationResult">
+        select id, name, num, authentication_straight, authentication_side, create_time, update_time, uid
+        from project_authentication
+        where uid = #{uid}
+        limit 1
+    </select>
+    
+    <insert id="insertAuthentication" parameterType="MedicalAuthentication" useGeneratedKeys="true" keyProperty="id">
+        insert into project_authentication(name, num, authentication_straight, authentication_side, create_time, update_time, uid)
+        values(#{name}, #{num}, #{authenticationStraight}, #{authenticationSide}, #{createTimeStamp}, #{updateTimeStamp}, #{uid})
+    </insert>
+    
+    <update id="updateAuthentication" parameterType="MedicalAuthentication">
+        update project_authentication
+        <set>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="num != null and num != ''">num = #{num},</if>
+            <if test="authenticationStraight != null">authentication_straight = #{authenticationStraight},</if>
+            <if test="authenticationSide != null">authentication_side = #{authenticationSide},</if>
+            <if test="updateTimeStamp != null">update_time = #{updateTimeStamp},</if>
+        </set>
+        where uid = #{uid}
+    </update>
+
+</mapper>
+

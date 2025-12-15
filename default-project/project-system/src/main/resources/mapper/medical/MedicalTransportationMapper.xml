@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.project.system.mapper.medical.MedicalTransportationMapper">
+    
+    <resultMap type="MedicalTransportation" id="MedicalTransportationResult">
+        <id     property="id"                 column="id"                 />
+        <result property="itineraryId"        column="itinerary_id"       />
+        <result property="transportType"      column="transport_type"     />
+        <result property="departureLocation"  column="departure_location" />
+        <result property="arrivalLocation"    column="arrival_location"   />
+        <result property="departureTime"      column="departure_time"     />
+        <result property="arrivalTime"        column="arrival_time"       />
+        <result property="transportNumber"    column="transport_number"   />
+        <result property="seatInfo"           column="seat_info"          />
+        <result property="ticketImage"        column="ticket_image"       />
+        <result property="notes"              column="notes"              />
+        <result property="createTimeStamp"    column="create_time"        />
+        <result property="updateTimeStamp"    column="update_time"        />
+        <result property="createBy"           column="create_by"          />
+        <result property="updateBy"           column="update_by"          />
+        <result property="remark"             column="remark"             />
+    </resultMap>
+
+    <sql id="selectTransportationVo">
+        select id, itinerary_id, transport_type, departure_location, arrival_location, 
+               departure_time, arrival_time, transport_number, seat_info, ticket_image, 
+               notes, create_time, update_time, create_by, update_by, remark
+        from project_transportation
+    </sql>
+
+    <select id="selectTransportationList" parameterType="MedicalTransportation" resultMap="MedicalTransportationResult">
+        <include refid="selectTransportationVo"/>
+        <where>  
+            <if test="itineraryId != null"> and itinerary_id = #{itineraryId}</if>
+            <if test="transportType != null"> and transport_type = #{transportType}</if>
+        </where>
+        order by departure_time asc
+    </select>
+    
+    <select id="selectTransportationById" parameterType="Long" resultMap="MedicalTransportationResult">
+        <include refid="selectTransportationVo"/>
+        where id = #{id}
+    </select>
+    
+    <select id="selectTransportationByItineraryId" parameterType="Long" resultMap="MedicalTransportationResult">
+        <include refid="selectTransportationVo"/>
+        where itinerary_id = #{itineraryId}
+        order by departure_time asc
+    </select>
+    
+    <insert id="insertTransportation" parameterType="MedicalTransportation" useGeneratedKeys="true" keyProperty="id">
+        insert into project_transportation(
+            itinerary_id, transport_type, departure_location, arrival_location, 
+            departure_time, arrival_time, transport_number, seat_info, ticket_image, 
+            notes, create_time, update_time, create_by, update_by, remark
+        )values(
+            #{itineraryId}, #{transportType}, #{departureLocation}, #{arrivalLocation}, 
+            #{departureTime}, #{arrivalTime}, #{transportNumber}, #{seatInfo}, #{ticketImage}, 
+            #{notes}, #{createTimeStamp}, #{updateTimeStamp}, #{createBy}, #{updateBy}, #{remark}
+        )
+    </insert>
+    
+    <update id="updateTransportation" parameterType="MedicalTransportation">
+        update project_transportation
+        <set>
+            <if test="transportType != null">transport_type = #{transportType},</if>
+            <if test="departureLocation != null">departure_location = #{departureLocation},</if>
+            <if test="arrivalLocation != null">arrival_location = #{arrivalLocation},</if>
+            <if test="departureTime != null">departure_time = #{departureTime},</if>
+            <if test="arrivalTime != null">arrival_time = #{arrivalTime},</if>
+            <if test="transportNumber != null">transport_number = #{transportNumber},</if>
+            <if test="seatInfo != null">seat_info = #{seatInfo},</if>
+            <if test="ticketImage != null">ticket_image = #{ticketImage},</if>
+            <if test="notes != null">notes = #{notes},</if>
+            <if test="updateTimeStamp != null">update_time = #{updateTimeStamp},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteTransportationById" parameterType="Long">
+        delete from project_transportation where id = #{id}
+    </delete>
+
+    <delete id="deleteTransportationByItineraryId" parameterType="Long">
+        delete from project_transportation where itinerary_id = #{itineraryId}
+    </delete>
+
+</mapper>
+

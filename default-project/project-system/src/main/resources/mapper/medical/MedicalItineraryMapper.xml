@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.project.system.mapper.medical.MedicalItineraryMapper">
+    
+    <resultMap type="MedicalItinerary" id="MedicalItineraryResult">
+        <id     property="id"                    column="id"                    />
+        <result property="signUpId"              column="sign_up_id"            />
+        <result property="meetingId"             column="meeting_id"            />
+        <result property="uid"                   column="uid"                   />
+        <result property="receptionLocation"     column="reception_location"    />
+        <result property="receptionExpert"       column="reception_expert"      />
+        <result property="receptionExpertPhone"  column="reception_expert_phone"/>
+        <result property="notes"                 column="notes"                 />
+        <result property="createTimeStamp"       column="create_time"           />
+        <result property="updateTimeStamp"       column="update_time"           />
+        <result property="createBy"              column="create_by"             />
+        <result property="updateBy"              column="update_by"             />
+        <result property="remark"                column="remark"                />
+    </resultMap>
+
+    <sql id="selectItineraryVo">
+        select id, sign_up_id, meeting_id, uid, reception_location, reception_expert, 
+               reception_expert_phone, notes, create_time, update_time, create_by, update_by, remark
+        from project_itinerary
+    </sql>
+
+    <select id="selectItineraryList" parameterType="MedicalItinerary" resultMap="MedicalItineraryResult">
+        <include refid="selectItineraryVo"/>
+        <where>  
+            <if test="signUpId != null"> and sign_up_id = #{signUpId}</if>
+            <if test="meetingId != null"> and meeting_id = #{meetingId}</if>
+            <if test="uid != null and uid != ''"> and uid = #{uid}</if>
+        </where>
+        order by create_time desc
+    </select>
+    
+    <select id="selectItineraryById" parameterType="Long" resultMap="MedicalItineraryResult">
+        <include refid="selectItineraryVo"/>
+        where id = #{id}
+    </select>
+    
+    <select id="selectItineraryBySignUpId" parameterType="Long" resultMap="MedicalItineraryResult">
+        <include refid="selectItineraryVo"/>
+        where sign_up_id = #{signUpId}
+    </select>
+    
+    <select id="selectItineraryByUidAndMeetingId" parameterType="map" resultMap="MedicalItineraryResult">
+        <include refid="selectItineraryVo"/>
+        where uid = #{uid} and meeting_id = #{meetingId}
+    </select>
+    
+    <insert id="insertItinerary" parameterType="MedicalItinerary" useGeneratedKeys="true" keyProperty="id">
+        insert into project_itinerary(
+            sign_up_id, meeting_id, uid, reception_location, reception_expert, 
+            reception_expert_phone, notes, create_time, update_time, create_by, update_by, remark
+        )values(
+            #{signUpId}, #{meetingId}, #{uid}, #{receptionLocation}, #{receptionExpert}, 
+            #{receptionExpertPhone}, #{notes}, #{createTimeStamp}, #{updateTimeStamp}, #{createBy}, #{updateBy}, #{remark}
+        )
+    </insert>
+    
+    <update id="updateItinerary" parameterType="MedicalItinerary">
+        update project_itinerary
+        <set>
+            <if test="receptionLocation != null">reception_location = #{receptionLocation},</if>
+            <if test="receptionExpert != null">reception_expert = #{receptionExpert},</if>
+            <if test="receptionExpertPhone != null">reception_expert_phone = #{receptionExpertPhone},</if>
+            <if test="notes != null">notes = #{notes},</if>
+            <if test="updateTimeStamp != null">update_time = #{updateTimeStamp},</if>
+            <if test="updateBy != null">update_by = #{updateBy},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="deleteItineraryById" parameterType="Long">
+        delete from project_itinerary where id = #{id}
+    </delete>
+
+    <delete id="deleteItineraryBySignUpId" parameterType="Long">
+        delete from project_itinerary where sign_up_id = #{signUpId}
+    </delete>
+
+</mapper>
+

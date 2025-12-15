@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.project.system.mapper.medical.MedicalCardMapper">
+    
+    <resultMap type="MedicalCard" id="MedicalCardResult">
+        <id     property="id"            column="id"            />
+        <result property="uid"           column="uid"           />
+        <result property="img"           column="img"           />
+        <result property="imgYt"         column="img_yt"         />
+        <result property="name"          column="name"          />
+        <result property="company"       column="company"       />
+        <result property="position"      column="position"      />
+        <result property="department"    column="department"    />
+        <result property="phone"         column="phone"         />
+        <result property="email"         column="email"         />
+        <result property="address"       column="address"       />
+        <result property="wechat"        column="wechat"        />
+        <result property="city"          column="city"          />
+        <result property="content"       column="content"       />
+        <result property="attachment"    column="attachment"    />
+        <result property="attachmentName" column="attachment_name" />
+        <result property="createTimeStamp"    column="create_time"   />
+        <result property="updateTimeStamp"    column="update_time"   />
+        <result property="isVip"         column="is_vip"        />
+        <result property="isStatus"      column="is_status"     />
+        <result property="viewNum"       column="view_num"      />
+    </resultMap>
+
+    <sql id="selectCardVo">
+        select id, uid, img, img_yt, name, company, position, department, phone, email, address, 
+               wechat, city, content, attachment, attachment_name, create_time, update_time, is_vip, is_status, view_num
+        from project_business_card
+    </sql>
+
+    <select id="selectCardList" parameterType="MedicalCard" resultMap="MedicalCardResult">
+        <include refid="selectCardVo"/>
+        <where>  
+            <if test="uid != null and uid != ''"> and uid = #{uid}</if>
+            <if test="name != null and name != ''"> and name like concat('%', #{name}, '%')</if>
+            <if test="position != null and position != ''"> and position like concat('%', #{position}, '%')</if>
+            <if test="department != null"> and department = #{department}</if>
+            <if test="city != null"> and city = #{city}</if>
+            <if test="isStatus != null"> and is_status = #{isStatus}</if>
+        </where>
+        order by create_time desc
+    </select>
+    
+    <select id="selectCardById" parameterType="Long" resultMap="MedicalCardResult">
+        <include refid="selectCardVo"/>
+        where id = #{id}
+    </select>
+    
+    <select id="countByUid" parameterType="String" resultType="int">
+        select count(1) from project_business_card where uid = #{uid}
+    </select>
+    
+    <insert id="insertCard" parameterType="MedicalCard" useGeneratedKeys="true" keyProperty="id">
+        insert into project_business_card(
+            uid, img, img_yt, name, company, position, department, phone, email, address,
+            wechat, city, content, attachment, attachment_name, create_time, is_vip, is_status, view_num
+        )values(
+            #{uid}, #{img}, #{imgYt}, #{name}, #{company}, #{position}, #{department}, #{phone}, #{email}, #{address},
+            #{wechat}, #{city}, #{content}, #{attachment}, #{attachmentName}, #{createTimeStamp}, #{isVip}, #{isStatus}, #{viewNum}
+        )
+    </insert>
+    
+    <update id="updateCard" parameterType="MedicalCard">
+        update project_business_card
+        <set>
+            <if test="img != null and img != ''">img = #{img},</if>
+            <if test="imgYt != null and imgYt != ''">img_yt = #{imgYt},</if>
+            <if test="name != null and name != ''">name = #{name},</if>
+            <if test="company != null">company = #{company},</if>
+            <if test="position != null">position = #{position},</if>
+            <if test="department != null">department = #{department},</if>
+            <if test="phone != null">phone = #{phone},</if>
+            <if test="email != null">email = #{email},</if>
+            <if test="address != null">address = #{address},</if>
+            <if test="wechat != null">wechat = #{wechat},</if>
+            <if test="city != null">city = #{city},</if>
+            <if test="content != null">content = #{content},</if>
+            <if test="attachment != null">attachment = #{attachment},</if>
+            <if test="attachmentName != null">attachment_name = #{attachmentName},</if>
+            <if test="updateTimeStamp != null">update_time = #{updateTimeStamp},</if>
+            <if test="isStatus != null">is_status = #{isStatus},</if>
+            <if test="viewNum != null">view_num = #{viewNum},</if>
+        </set>
+        where id = #{id}
+    </update>
+    
+    <delete id="deleteCardById" parameterType="Long">
+        delete from project_business_card where id = #{id}
+    </delete>
+    
+    <update id="incrementViewNum" parameterType="Long">
+        update project_business_card
+        set view_num = view_num + 1
+        where id = #{id}
+    </update>
+
+</mapper>

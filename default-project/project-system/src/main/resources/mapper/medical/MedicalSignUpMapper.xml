@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.project.system.mapper.medical.MedicalSignUpMapper">
+    
+    <resultMap type="MedicalSignUp" id="MedicalSignUpResult">
+        <id     property="id"                column="id"                />
+        <result property="signUpName"         column="sign_up_name"     />
+        <result property="signUpPhone"       column="sign_up_phone"     />
+        <result property="signUpCompany"      column="sign_up_company"  />
+        <result property="signUpPosition"    column="sign_up_position" />
+        <result property="createTimeStamp"   column="create_time"      />
+        <result property="extContent"        column="ext_content"      />
+        <result property="uid"               column="uid"              />
+        <result property="meetingId"         column="meeting_id"       />
+        <result property="status"            column="status"           />
+        <result property="tripContent"       column="trip_content"     />
+        <result property="remark"            column="remark"            />
+    </resultMap>
+
+    <sql id="selectSignUpVo">
+        select id, sign_up_name, sign_up_phone, sign_up_company, sign_up_position, create_time,
+               ext_content, uid, meeting_id, status, trip_content, remark
+        from project_sign_up
+    </sql>
+
+    <select id="selectSignUpList" parameterType="MedicalSignUp" resultMap="MedicalSignUpResult">
+        <include refid="selectSignUpVo"/>
+        <where>  
+            <if test="uid != null and uid != ''"> and uid = #{uid}</if>
+            <if test="meetingId != null"> and meeting_id = #{meetingId}</if>
+            <if test="status != null"> and status = #{status}</if>
+        </where>
+        order by create_time desc
+    </select>
+    
+    <select id="selectSignUpById" parameterType="Long" resultMap="MedicalSignUpResult">
+        <include refid="selectSignUpVo"/>
+        where id = #{id}
+    </select>
+    
+    <select id="selectSignUpByUidAndMeetingId" resultMap="MedicalSignUpResult">
+        <include refid="selectSignUpVo"/>
+        where uid = #{uid} and meeting_id = #{meetingId}
+        limit 1
+    </select>
+    
+    <insert id="insertSignUp" parameterType="MedicalSignUp" useGeneratedKeys="true" keyProperty="id">
+        insert into project_sign_up(
+            sign_up_name, sign_up_phone, sign_up_company, sign_up_position, create_time,
+            ext_content, uid, meeting_id, status, trip_content, remark
+        )values(
+            #{signUpName}, #{signUpPhone}, #{signUpCompany}, #{signUpPosition}, #{createTimeStamp},
+            #{extContent}, #{uid}, #{meetingId}, #{status}, #{tripContent}, #{remark}
+        )
+    </insert>
+    
+    <update id="updateSignUp" parameterType="MedicalSignUp">
+        update project_sign_up
+        <set>
+            <if test="signUpName != null and signUpName != ''">sign_up_name = #{signUpName},</if>
+            <if test="signUpPhone != null">sign_up_phone = #{signUpPhone},</if>
+            <if test="signUpCompany != null">sign_up_company = #{signUpCompany},</if>
+            <if test="signUpPosition != null">sign_up_position = #{signUpPosition},</if>
+            <if test="extContent != null">ext_content = #{extContent},</if>
+            <if test="status != null">status = #{status},</if>
+            <if test="tripContent != null">trip_content = #{tripContent},</if>
+            <if test="remark != null">remark = #{remark},</if>
+        </set>
+        where id = #{id}
+    </update>
+    
+    <delete id="deleteSignUpById" parameterType="Long">
+        delete from project_sign_up where id = #{id}
+    </delete>
+
+</mapper>
+

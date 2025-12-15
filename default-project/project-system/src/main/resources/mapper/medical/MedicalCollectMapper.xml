@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.project.system.mapper.medical.MedicalCollectMapper">
+    
+    <resultMap type="MedicalCollect" id="MedicalCollectResult">
+        <id     property="id"            column="id"            />
+        <result property="uid"           column="uid"           />
+        <result property="cardId"        column="card_id"       />
+        <result property="createTimeStamp" column="create_time" />
+    </resultMap>
+
+    <select id="selectCollectList" parameterType="MedicalCollect" resultMap="MedicalCollectResult">
+        select id, uid, card_id, create_time
+        from project_collect
+        <where>  
+            <if test="uid != null and uid != ''"> and uid = #{uid}</if>
+            <if test="cardId != null"> and card_id = #{cardId}</if>
+        </where>
+        order by create_time desc
+    </select>
+    
+    <select id="selectCollectByUidAndCardId" resultMap="MedicalCollectResult">
+        select id, uid, card_id, create_time
+        from project_collect
+        where uid = #{uid} and card_id = #{cardId}
+        limit 1
+    </select>
+    
+    <insert id="insertCollect" parameterType="MedicalCollect" useGeneratedKeys="true" keyProperty="id">
+        insert into project_collect(uid, card_id, create_time)
+        values(#{uid}, #{cardId}, #{createTimeStamp})
+    </insert>
+    
+    <delete id="deleteCollectById" parameterType="Long">
+        delete from project_collect where id = #{id}
+    </delete>
+    
+    <delete id="deleteCollectByUidAndCardId">
+        delete from project_collect where uid = #{uid} and card_id = #{cardId}
+    </delete>
+    
+    <select id="selectCollectCardList" resultType="java.util.HashMap">
+        select 
+            l.id, l.name, l.img, l.company, l.position, l.department, 
+            l.attachment, l.attachment_name, l.is_authentication
+        from project_collect i
+        inner join project_business_card l on i.card_id = l.id
+        <where>
+            <if test="uid != null and uid != ''"> and i.uid = #{uid}</if>
+            <if test="position != null and position != ''"> and l.department = #{position}</if>
+            <if test="city != null and city != ''"> and l.city = #{city}</if>
+            <if test="title != null and title != ''"> and l.name like concat('%', #{title}, '%')</if>
+            and l.is_status = 1
+        </where>
+        order by i.create_time desc
+    </select>
+
+</mapper>
+
